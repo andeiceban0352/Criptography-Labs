@@ -58,7 +58,7 @@ def cezar_decript(message, key1, key2 = None):
         for char in message_2:
             index = curr_alphabet.index(char)
             letter = (index - key1) % 26
-            rez += curr_alphabet[letter]
+            rez += shifted_alphabet[letter]
         return rez
 
 
@@ -126,18 +126,18 @@ def main():
         elif choice == '2':
             message = str(input('Enter the message to decript : '))
             message = message.replace(" ", "").upper()
+            
+            key1 = int(input("Enter decription key : "))
+            if not 1 <= key1 <= 25:
+                print("Wrong key. Enter a value between 1 and 25")
+                continue
 
             for char in message:
                 if char not in ALPHABET:
                     print(f"Invalid character '{char} in the message. You must input just latin alphabet letters")
                     continue
 
-
-            key1 = int(input("Enter the decripted key : "))
-            if not 1 <= key1 <= 25:
-                print("Wrong key. Enter a value between 1 and 25")
-                continue
-            
+          
             key2 = str(input('Enter the second key (optionl) : '))
             key2 = key2.replace(" ", "").upper()
 
@@ -164,7 +164,7 @@ def main():
                         print(f"Invalid character '{char} in the message. You must input just latin alphabet letters")
                         continue
 
-                decripted_message = cezar_encript(message, key1, key2)
+                decripted_message = cezar_decript(message, key1, key2)
                 print("The decripted message with 2 keys is:", decripted_message)
                 print("The shifted alphabet is : " , get_shiftedalphabet(key2))
             
